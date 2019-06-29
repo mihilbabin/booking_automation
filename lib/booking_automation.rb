@@ -1,7 +1,7 @@
-require "httparty"
-require "oj"
-require "booking_automation/constants"
-require "booking_automation/version"
+require 'httparty'
+require 'oj'
+require 'booking_automation/constants'
+require 'booking_automation/version'
 
 module BookingAutomation
   class Error < StandardError; end
