@@ -1,9 +1,9 @@
 require "httparty"
 require "oj"
-require "bautom/constants"
-require "bautom/version"
+require "booking_automation/constants"
+require "booking_automation/version"
 
-module Bautom
+module BookingAutomation
   class Error < StandardError; end
 
   class Client

@@ -1,17 +1,17 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "bautom/version"
+require "booking_automation/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "bautom"
-  spec.version       = Bautom::VERSION
+  spec.name          = "booking_automation"
+  spec.version       = BookingAutomation::VERSION
   spec.authors       = ["Michael Babin"]
   spec.email         = ["michaelbabin.eu@gmail.com"]
 
   spec.summary       = %q{Booking Automation API}
   spec.description   = %q{Bindings for BookingAutomation.com API}
-  spec.homepage      = "https://github.com/mihilbabin/bautom"
+  spec.homepage      = "https://github.com/mihilbabin/booking_automation"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

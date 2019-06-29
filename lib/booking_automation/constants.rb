@@ -1,4 +1,4 @@
-module Bautom
+module BookingAutomation
   module Constants
     API_ENDPOINT = 'https://manage.bookingautomation.com/api/json'.freeze
 
