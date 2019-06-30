@@ -2,8 +2,7 @@ require 'bundler/setup'
 require 'webmock/rspec'
 
 require 'booking_automation'
-
-include WebMock
+Dir[File.join(Dir.pwd, 'spec/support/**/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

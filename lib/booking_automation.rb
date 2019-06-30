@@ -6,6 +6,15 @@ require 'booking_automation/version'
 module BookingAutomation
   class Error < StandardError; end
 
+  class APIError < StandardError
+    attr_accessor :response
+
+    def initialize(msg, response)
+      super(msg)
+      @response = response
+    end
+  end
+
   class Client
     include HTTParty
     base_uri Constants::API_ENDPOINT
@@ -22,6 +31,8 @@ module BookingAutomation
       json['getProperties']
     rescue Oj::ParseError
       raise Error, Constants::PARSE_ERROR_MSG
+    rescue APIError => e
+      e.response
     end
 
     def get_property(prop_key, options={})
@@ -33,6 +44,8 @@ module BookingAutomation
       json['getProperty'].first
     rescue Oj::ParseError
       raise Error, Constants::PARSE_ERROR_MSG
+    rescue APIError => e
+      e.response
     end
 
     def get_bookings(prop_key, options={})
@@ -43,6 +56,8 @@ module BookingAutomation
       parse! response
     rescue Oj::ParseError
       raise Error, Constants::PARSE_ERROR_MSG
+    rescue APIError => e
+      e.response
     end
 
     private
@@ -64,9 +79,9 @@ module BookingAutomation
 
     def parse!(response)
       json = Oj.load response.body
-      raise(
-        Error,
-        "API Error: #{json['errorCode']} #{json['error']}"
+      raise APIError.new(
+        "API Error: #{json['errorCode']} #{json['error']}",
+        json
        ) if json.is_a?(Hash) && !json['error'].nil?
       json
     end
