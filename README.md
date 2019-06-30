@@ -1,4 +1,4 @@
-# BookingAutomation [![Build Status](https://travis-ci.com/mihilbabin/booking_automation.svg?branch=master)](https://travis-ci.com/mihilbabin/booking_automation)
+# BookingAutomation [![Build Status](https://travis-ci.com/mihilbabin/booking_automation.svg?branch=master)](https://travis-ci.com/mihilbabin/booking_automation) [![Gem Version](https://badge.fury.io/rb/booking_automation.svg)](https://badge.fury.io/rb/booking_automation)
 
 This is a simple wrapper of [BookingAutomation API](https://manage.bookingautomation.com/api/index.html). It allows to fetch data related to properties and bookings created and filter that data as per API docs.
 

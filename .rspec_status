@@ -1,0 +1,12 @@
+example_id                                        | status | run_time        |
+------------------------------------------------- | ------ | --------------- |
+./spec/booking_automation_client_spec.rb[1:1:1]   | passed | 0.00062 seconds |
+./spec/booking_automation_client_spec.rb[1:2:1]   | passed | 0.00023 seconds |
+./spec/booking_automation_client_spec.rb[1:2:2]   | passed | 0.00007 seconds |
+./spec/booking_automation_client_spec.rb[1:3:1:1] | passed | 0.00544 seconds |
+./spec/booking_automation_client_spec.rb[1:3:2:1] | passed | 0.0008 seconds  |
+./spec/booking_automation_client_spec.rb[1:4:1:1] | passed | 0.00113 seconds |
+./spec/booking_automation_client_spec.rb[1:4:2:1] | passed | 0.00076 seconds |
+./spec/booking_automation_client_spec.rb[1:5:1:1] | passed | 0.00111 seconds |
+./spec/booking_automation_client_spec.rb[1:5:2:1] | passed | 0.00081 seconds |
+./spec/booking_automation_spec.rb[1:1]            | passed | 0.00037 seconds |
