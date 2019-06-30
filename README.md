@@ -1,8 +1,6 @@
-# BookingAutomation
+# BookingAutomation [![Build Status](https://travis-ci.com/mihilbabin/booking_automation.svg?branch=master)](https://travis-ci.com/mihilbabin/booking_automation)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/booking_automation`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This is a simple wrapper of [BookingAutomation API](https://manage.bookingautomation.com/api/index.html). It allows to fetch data related to properties and bookings created and filter that data as per API docs.
 
 ## Installation
 
@@ -22,7 +20,26 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To use a gem you should allow API Key through your BookingAutomation settings.
+Wrapper needs you to supply the account API key (auth_token) set at the menu "Settings > Account"
+Operations involving a specific property need to supply the property key (propKey) set at the menu "Settings > Properties > Link"
+
+### Sample Code
+
+```ruby
+auth_token = '<your-key>'
+client = BookingAutomation::Client.new auth_token
+
+client.get_properties # List all account properties
+
+prop_key = '<property-key>'
+
+client.get_property(prop_key) # Display individual property data
+client.get_property(prop_key, includeRooms: true) # Pass parameters as per docs
+
+client.get_bookings(prop_key) # Get all bookings for given property
+client.get_bookings(prop_key, includeInvoice: true) # Pass parameters as per docs
+```
 
 ## Development
 
