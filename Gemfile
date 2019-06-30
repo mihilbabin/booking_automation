@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-# Specify your gem's dependencies in bautom.gemspec
+# Specify your gem's dependencies in booking_automation.gemspec
 gemspec
