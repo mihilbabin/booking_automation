@@ -43,5 +43,6 @@ Gem::Specification.new do |spec|
 
   # Dependencies
   spec.add_dependency 'httparty', '~> 0.17.0'
+  spec.add_dependency 'nokogiri', '~> 1.10'
   spec.add_dependency 'oj', '~> 3.7'
 end
