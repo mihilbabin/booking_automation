@@ -1,4 +1,4 @@
-RSpec.describe BookingAutomation::Client do
+RSpec.describe BookingAutomation::JSONClient do
   include_context 'responses'
 
   subject { described_class.new auth_token }
