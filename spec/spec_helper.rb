@@ -1,5 +1,7 @@
 require 'bundler/setup'
 require 'webmock/rspec'
+require 'simplecov'
+SimpleCov.start
 
 require 'booking_automation'
 Dir[File.join(Dir.pwd, 'spec/support/**/*.rb')].each { |f| require f }
