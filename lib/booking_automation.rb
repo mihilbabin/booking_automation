@@ -3,6 +3,7 @@ require 'oj'
 require 'booking_automation/constants'
 require 'booking_automation/json_client'
 require 'booking_automation/version'
+require 'ext/hash'
 
 module BookingAutomation
   class Error < StandardError; end
