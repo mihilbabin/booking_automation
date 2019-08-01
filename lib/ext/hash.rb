@@ -4,7 +4,7 @@ class Hash
   class << self
     def from_xml(xml_io)
       result = Nokogiri::XML(xml_io)
-      { result.root.name.to_sym => xml_node_to_hash(result.root)}
+      { result.root.name => xml_node_to_hash(result.root)}
     end
 
     def xml_node_to_hash(node)
@@ -13,9 +13,15 @@ class Hash
         if node.attributes != {}
           attributes = {}
           node.attributes.keys.each do |key|
-            attributes[node.attributes[key].name.to_sym] = node.attributes[key].value
+            if key == :id || key == 'id'
+              node.name = node.attributes[key].value
+              node.delete(key.to_s)
+            else
+              attributes[node.attributes[key].name] = node.attributes[key].value
+            end
           end
         end
+
         if node.children.size > 0
           node.children.each do |child|
             result = xml_node_to_hash(child)
@@ -23,16 +29,16 @@ class Hash
             if child.name == 'text'
               unless child.next_sibling || child.previous_sibling
                 return result unless attributes
-                result_hash[child.name.to_sym] = result
+                result_hash[child.name] = result
               end
-            elsif result_hash[child.name.to_sym]
-              if result_hash[child.name.to_sym].is_a?(Array)
-                 result_hash[child.name.to_sym] << result
+            elsif result_hash[child.name]
+              if result_hash[child.name].is_a?(Array)
+                 result_hash[child.name] << result
               else
-                 result_hash[child.name.to_sym] = [result_hash[child.name.to_sym]] << result
+                 result_hash[child.name] = [result_hash[child.name]] << result
               end
             else
-              result_hash[child.name.to_sym] = result
+              result_hash[child.name] = result
             end
           end
           if attributes
@@ -43,7 +49,7 @@ class Hash
           return attributes
         end
       else
-        return node.content.to_s
+        node.content.to_s
       end
     end
   end
