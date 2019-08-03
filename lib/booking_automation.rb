@@ -1,8 +1,12 @@
 require 'httparty'
 require 'oj'
+
 require 'booking_automation/constants'
 require 'booking_automation/json_client'
 require 'booking_automation/version'
+require 'booking_automation/xml_client'
+require 'booking_automation/xml_request'
+
 require 'ext/hash'
 
 module BookingAutomation
