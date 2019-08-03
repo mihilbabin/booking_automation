@@ -11,15 +11,31 @@ module BookingAutomation
       @password = password
     end
 
-    def get_properties(prop_id = nil)
-      self.class.post('/getProperties', body: xmlize(prop_id: prop_id))
+    def get_properties(propid = nil)
+      response = self.class.post('/getProperties', body: xmlize(propid: propid))
+      parse! response
+    rescue APIError => e
+      e.response
     end
 
-    def get_bookings
-      
+    def get_bookings(opts = {})
+      valid_opts = opts.slice(*Constants::VALID_XML_BOOKING_OPTS)
+      response = self.class.post('/getBookings', body: xmlize(opts))
+      parse! response
+    rescue APIError => e
+      e.response
     end
 
     private
+
+    def parse!(response)
+      hash = Hash.from_xml(response.body)
+      raise APIError.new(
+        "API Error: #{hash['code']} #{hash['error']}",
+        hash
+      ) if hash.key?('error')
+      hash
+    end
 
     def auth
       { username: @username, password: @password }

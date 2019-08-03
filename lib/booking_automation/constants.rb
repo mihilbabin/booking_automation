@@ -16,5 +16,15 @@ module BookingAutomation
       includeInvoice: false,
       includeInfoItems: false
     }.freeze
+
+    VALID_XML_BOOKING_OPTS = %i[
+      modified
+      datefrom
+      dateto
+      propid
+      roomid
+      masterid
+      bookid
+    ].freeze
   end
 end

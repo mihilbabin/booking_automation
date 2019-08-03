@@ -13,7 +13,7 @@ class Hash
         if node.attributes != {}
           attributes = {}
           node.attributes.keys.each do |key|
-            if key == :id || key == 'id'
+            if [:id, 'id', :name, 'name'].include?(key)
               node.name = node.attributes[key].value
               node.delete(key.to_s)
             else
