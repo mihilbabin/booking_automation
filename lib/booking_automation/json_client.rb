@@ -1,7 +1,7 @@
 module BookingAutomation
   class JSONClient
     include HTTParty
-    base_uri Constants::API_ENDPOINT
+    base_uri Constants::JSON_API_ENDPOINT
 
     attr_accessor :auth_token
 

@@ -28,7 +28,6 @@ RSpec.describe Hash do
       expect(parsed.dig(root, id)).to_not be_nil
     end
 
-
     it 'preserves attributes' do
       expect(parsed.dig(root, attribute)).to_not be_nil
     end

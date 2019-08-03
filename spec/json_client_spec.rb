@@ -28,7 +28,7 @@ RSpec.describe BookingAutomation::JSONClient do
       before(:each) do
         stub_request(
           :post,
-          "#{BookingAutomation::Constants::API_ENDPOINT}/getProperties"
+          "#{BookingAutomation::Constants::JSON_API_ENDPOINT}/getProperties"
         ).with(body: subject.send(:authentication).to_json).to_return(body: {
           error: 'Unauthorized',
           errorCode: '1000'
@@ -47,7 +47,7 @@ RSpec.describe BookingAutomation::JSONClient do
       before(:each) do
         stub_request(
           :post,
-          "#{BookingAutomation::Constants::API_ENDPOINT}/getProperties"
+          "#{BookingAutomation::Constants::JSON_API_ENDPOINT}/getProperties"
         ).with(body: subject.send(:authentication).to_json).to_return(body: properties.to_json)
       end
 
@@ -62,7 +62,7 @@ RSpec.describe BookingAutomation::JSONClient do
       before(:each) do
         stub_request(
           :post,
-          "#{BookingAutomation::Constants::API_ENDPOINT}/getProperty"
+          "#{BookingAutomation::Constants::JSON_API_ENDPOINT}/getProperty"
         ).with(
           body: subject.send(:authentication, '111')
             .merge(BookingAutomation::Constants::DEFAULT_PROPERTY_OPTIONS)
@@ -85,7 +85,7 @@ RSpec.describe BookingAutomation::JSONClient do
       before(:each) do
         stub_request(
           :post,
-          "#{BookingAutomation::Constants::API_ENDPOINT}/getProperty"
+          "#{BookingAutomation::Constants::JSON_API_ENDPOINT}/getProperty"
         ).with(
           body: subject.send(:authentication, '111')
             .merge(BookingAutomation::Constants::DEFAULT_PROPERTY_OPTIONS)
@@ -104,7 +104,7 @@ RSpec.describe BookingAutomation::JSONClient do
       before(:each) do
         stub_request(
           :post,
-          "#{BookingAutomation::Constants::API_ENDPOINT}/getBookings"
+          "#{BookingAutomation::Constants::JSON_API_ENDPOINT}/getBookings"
         ).with(
           body: subject.send(:authentication, '111')
             .merge(BookingAutomation::Constants::DEFAULT_BOOKING_OPTIONS)
@@ -127,7 +127,7 @@ RSpec.describe BookingAutomation::JSONClient do
       before(:each) do
         stub_request(
           :post,
-          "#{BookingAutomation::Constants::API_ENDPOINT}/getBookings"
+          "#{BookingAutomation::Constants::JSON_API_ENDPOINT}/getBookings"
         ).with(
           body: subject.send(:authentication, '111')
             .merge(BookingAutomation::Constants::DEFAULT_BOOKING_OPTIONS)

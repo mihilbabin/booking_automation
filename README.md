@@ -24,11 +24,11 @@ To use a gem you should allow API Key through your BookingAutomation settings.
 Wrapper needs you to supply the account API key (auth_token) set at the menu "Settings > Account"
 Operations involving a specific property need to supply the property key (propKey) set at the menu "Settings > Properties > Link"
 
-### Sample Code
+### Sample Code for JSON API
 
 ```ruby
 auth_token = '<your-key>'
-client = BookingAutomation::Client.new auth_token
+client = BookingAutomation::JSONClient.new auth_token
 
 client.get_properties # List all account properties
 
