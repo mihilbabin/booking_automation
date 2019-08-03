@@ -26,7 +26,7 @@ module BookingAutomation
     end
 
     def xmlize(opts = {})
-      XMLRequest.new(auth, opts)
+      XMLRequest.new(auth, opts).to_xml
     end
   end
 end
