@@ -1,6 +1,6 @@
 RSpec.describe Hash do
   describe '#from_xml' do
-    let(:xml_file) { fixture_file('test.xml') }
+    let(:xml_file) { fixture_file('bookings.xml') }
     let(:xml_string) { xml_file.read }
     let(:parsed) { Hash.from_xml(xml_file) }
 

@@ -36,4 +36,84 @@ RSpec.describe BookingAutomation::XMLClient do
       end
     end
   end
+
+  context 'endpoints' do
+    shared_examples 'unauthorized' do
+      it 'returns unauthorized error' do
+        expect(subject).to eq({ 'error' => { 'code' => '1004', 'text' => 'Unauthorized'}})
+      end
+    end
+
+    describe '#get_properties' do
+      subject { described_class.new(username, password).get_properties(opts) }
+      let(:opts) { {} }
+
+      context 'wrong credentials' do
+        before(:each) do
+          stub_request(
+            :post,
+            "#{BookingAutomation::Constants::XML_API_ENDPOINT}/getProperties"
+          ).with(
+            body: BookingAutomation::XMLRequest.new({ username: username, password: password }).to_xml
+          ).to_return(body: <<-XML
+          <error code="1004">Unauthorized</error>
+          XML
+          )
+        end
+
+        it_behaves_like 'unauthorized'
+      end
+
+      context 'correct credentials' do
+        before(:each) do
+          stub_request(
+            :post,
+            "#{BookingAutomation::Constants::XML_API_ENDPOINT}/getProperties"
+          ).with(
+            body: BookingAutomation::XMLRequest.new({ username: username, password: password }).to_xml
+          ).to_return(body: fixture_file('properties.xml').read)
+        end
+
+        it 'returns parsed properties' do
+          expect(subject['properties']).to_not be_empty
+        end
+      end
+    end
+
+    describe '#get_bookings' do
+      subject { described_class.new(username, password).get_bookings(opts) }
+      let(:opts) { {} }
+
+      context 'wrong credentials' do
+        before(:each) do
+          stub_request(
+            :post,
+            "#{BookingAutomation::Constants::XML_API_ENDPOINT}/getBookings"
+          ).with(
+            body: BookingAutomation::XMLRequest.new({ username: username, password: password }).to_xml
+          ).to_return(body: <<-XML
+          <error code="1004">Unauthorized</error>
+          XML
+          )
+        end
+
+        it_behaves_like 'unauthorized'
+      end
+
+      context 'correct credentials' do
+        before(:each) do
+          stub_request(
+            :post,
+            "#{BookingAutomation::Constants::XML_API_ENDPOINT}/getBookings"
+          ).with(
+            body: BookingAutomation::XMLRequest.new({ username: username, password: password }).to_xml
+          ).to_return(body: fixture_file('bookings.xml').read)
+        end
+
+        it 'returns parsed bookings' do
+          expect(subject['bookings']).to_not be_empty
+        end
+      end
+    end
+  end
 end

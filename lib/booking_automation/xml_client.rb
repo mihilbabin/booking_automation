@@ -11,8 +11,8 @@ module BookingAutomation
       @password = password
     end
 
-    def get_properties(propid = nil)
-      response = self.class.post('/getProperties', body: xmlize(propid: propid))
+    def get_properties(opts = {})
+      response = self.class.post('/getProperties', body: xmlize(opts.slice(:propid)))
       parse! response
     rescue APIError => e
       e.response
@@ -20,7 +20,7 @@ module BookingAutomation
 
     def get_bookings(opts = {})
       valid_opts = opts.slice(*Constants::VALID_XML_BOOKING_OPTS)
-      response = self.class.post('/getBookings', body: xmlize(opts))
+      response = self.class.post('/getBookings', body: xmlize(valid_opts))
       parse! response
     rescue APIError => e
       e.response
