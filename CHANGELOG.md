@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2019-08-04
+
+### Added
+
+- Added XML client to interact with XML API
+- Added ability to fetch properties through XML API
+- Added ability to fetch bookings through XML API
+
+### Changed
+
+- Renamed Client to JSONClient
+
 ## [0.1.0] - 2019-06-30
 
 ### Added

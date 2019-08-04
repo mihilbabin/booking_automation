@@ -1,10 +1,21 @@
 require 'bundler/setup'
 require 'webmock/rspec'
+require 'simplecov'
+
+require_relative './helpers'
+
+SimpleCov.start do
+  add_filter "/spec/"
+end
+
+RSPEC_ROOT = File.dirname __FILE__
 
 require 'booking_automation'
 Dir[File.join(Dir.pwd, 'spec/support/**/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
+  config.include Helpers
+
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
 

@@ -39,9 +39,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'simplecov', '~> 0.17.0'
   spec.add_development_dependency 'webmock', '~> 3.6'
 
   # Dependencies
   spec.add_dependency 'httparty', '~> 0.17.0'
+  spec.add_dependency 'nokogiri', '~> 1.10'
   spec.add_dependency 'oj', '~> 3.7'
 end
