@@ -41,6 +41,46 @@ client.get_bookings(prop_key) # Get all bookings for given property
 client.get_bookings(prop_key, includeInvoice: true) # Pass parameters as per docs
 ```
 
+### Sample Code for XML API
+
+```ruby
+username = '<your-username>'
+password = '<your-password>'
+client = BookingAutomation::XMLClient.new username, password
+
+client.get_properties # List all account properties
+
+client.get_properties(propid: 123) # Display individual property data
+
+client.get_bookings() # Get all bookings
+client.get_bookings(propid: 123, datefrom: '20190101') # Pass parameters as per docs
+```
+
+Data returned is already parsed in a meaningful way to plain Ruby `Hash`.
+IDs and names are extracted to a top level to avoid hash keys collision.
+Attributes are also preserved.
+
+Example:
+
+```xml
+<bookings attr="test">
+    <booking id="1"><!-- DATA --></booking>
+    <booking id="2"><!-- DATA --></booking>
+</bookings>
+```
+
+will become:
+
+```ruby
+{
+    'bookings' => {
+        'attr' => 'test',
+        '1' => {...},
+        '2' => {...}
+    }
+}
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
