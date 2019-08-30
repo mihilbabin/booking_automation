@@ -26,6 +26,13 @@ module BookingAutomation
       e.response
     end
 
+    def modify_booking(id, attrs = {})
+      response = self.class.post('/putBookings', body: modify_payload(id, attrs))
+      parse! response
+    rescue APIError => e
+      e.response
+    end
+
     private
 
     def parse!(response)
@@ -43,6 +50,19 @@ module BookingAutomation
 
     def xmlize(opts = {})
       XMLRequest.new(auth, opts).to_xml
+    end
+
+    def modify_payload(id, attrs = {})
+      payload = Nokogiri::XML(xmlize())
+      Nokogiri::XML::Builder.with(payload.at('request')) do |xml|
+        xml.bookings do
+          xml.booking(id: id, action: 'modify') do
+            attrs.each do |prop, value|
+              xml.public_send prop, value
+            end
+          end
+        end
+      end.doc.root.to_xml
     end
   end
 end
