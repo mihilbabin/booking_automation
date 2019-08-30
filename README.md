@@ -54,6 +54,8 @@ client.get_properties(propid: 123) # Display individual property data
 
 client.get_bookings() # Get all bookings
 client.get_bookings(propid: 123, datefrom: '20190101') # Pass parameters as per docs
+
+client.modify_booking(123, guestFirstName: 'John') # Updates by id with given params
 ```
 
 Data returned is already parsed in a meaningful way to plain Ruby `Hash`.

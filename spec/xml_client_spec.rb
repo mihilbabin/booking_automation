@@ -115,5 +115,66 @@ RSpec.describe BookingAutomation::XMLClient do
         end
       end
     end
+
+    describe '#modify_booking' do
+      let(:id) { 1 }
+      let(:opts) { { guestFirstName: name } }
+      let(:name) { 'Jane' }
+      subject { described_class.new(username, password).modify_booking(id, opts) }
+
+      context 'wrong credentials' do
+        before(:each) do
+          stub_request(
+            :post,
+            "#{BookingAutomation::Constants::XML_API_ENDPOINT}/putBookings"
+          ).with(
+            body: <<~XML.strip
+              <request>
+                <auth>
+                  <username>#{username}</username>
+                  <password>#{password}</password>
+                </auth>
+              <bookings><booking id="#{id}" action="modify"><guestFirstName>#{name}</guestFirstName></booking></bookings></request>
+            XML
+          ).to_return(body: <<-XML
+          <error code="1004">Unauthorized</error>
+          XML
+          )
+        end
+
+        it_behaves_like 'unauthorized'
+      end
+
+      context 'correct credentials' do
+        before(:each) do
+          stub_request(
+            :post,
+            "#{BookingAutomation::Constants::XML_API_ENDPOINT}/putBookings"
+          ).with(
+            body: <<~XML.strip
+            <request>
+              <auth>
+                <username>#{username}</username>
+                <password>#{password}</password>
+              </auth>
+            <bookings><booking id="#{id}" action="modify"><guestFirstName>#{name}</guestFirstName></booking></bookings></request>
+          XML
+          ).to_return(body: <<~XML
+            <?xml version="1.0" encoding="UTF-8"?>
+            <bookings>
+              <booking id="#{id}" action="modify">
+                <guestFirstName>#{name}</guestFirstName>
+              </booking>
+            </bookings>
+          XML
+          )
+        end
+
+        it 'returns edited fields' do
+          pp subject
+          expect(subject.dig("bookings", id.to_s, "guestFirstName")).to eq name
+        end
+      end
+    end
   end
 end

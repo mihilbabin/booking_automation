@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2019-08-30
+
+### Added
+
+- Added ability to update bookings through XML API
+
 ## [0.2.0] - 2019-08-04
 
 ### Added
